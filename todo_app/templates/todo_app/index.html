@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Todo List</h1>
+        </div>
+        <div class="form">
+            <form action="{% url 'addtask' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="task">
+                <input type="submit" value="Add Task">
+            </form>
+        </div>
+        <div class="tasklist">
+            <table>
+                {% for t in tasks %}
+                <tr>
+                    <td>{{ t.task }}</td>
+                    <td>
+                        <a href="{% url 'update' t.id %}">Edit</a>
+                        <a href="{% url 'delete' t.id %}">Delete</a>
+                    </td>
+                </tr>
+                    {% empty %}
+                <h2>No task found! Create a task.</h2>
+                    {% endfor %}
+            </table>
+            
+                
+        </div>
+    </div>
+</body>
+</html>
