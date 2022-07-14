@@ -5,35 +5,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding:0;
+            margin: 0;
+            outline: none !important;
+        }
+
+        body {
+            background: linear-gradient(
+                to right,
+                #333 0%,
+                #333 50%,
+                orange 50%,
+                orange 100%
+            );
+            height: 70vh;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .box {
+            margin: 10% auto;
+            max-width: 400px;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .form {
+            padding: 20px;
+        }
+
+        .form input {
+            padding: 8px;
+            font-size: 12pt;
+        }
+
+        .tasklist {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12pt;
+        }
+        
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Todo List</h1>
-        </div>
-        <div class="form">
-            <form action="{% url 'addtask' %}" method="post">
-                {% csrf_token %}
-                <input type="text" name="task">
-                <input type="submit" value="Add Task">
-            </form>
-        </div>
-        <div class="tasklist">
-            <table>
-                {% for t in tasks %}
-                <tr>
-                    <td>{{ t.task }}</td>
-                    <td>
-                        <a href="{% url 'update' t.id %}">Edit</a>
-                        <a href="{% url 'delete' t.id %}">Delete</a>
-                    </td>
-                </tr>
-                    {% empty %}
-                <h2>No task found! Create a task.</h2>
-                    {% endfor %}
-            </table>
-            
+        <div class="box">
+            <div class="header">
+                <h1>Todo List</h1>
+            </div>
+            <div class="form">
+                <form action="{% url 'addtask' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="task" required>
+                    <input type="submit" class="button" value="Add Task">
+                </form>
+            </div>
+            <div class="tasklist">
+                <table>
+                    {% for t in tasks %}
+                    <div class="task-list">
+                        <tr class="task-row">
+                            <td>&#10022;{{ t.task }}</td>
+                            <td>
+                                <a href="{% url 'update' t.id %}">Edit</a>
+                                <a href="{% url 'delete' t.id %}">Delete</a>
+                            </td>
+                        </tr>
+                    </div>
+                        {% empty %}
+                    <h2>No task found! Create a task.</h2>
+                        {% endfor %}
+                </table>
                 
+                    
+            </div>
         </div>
     </div>
 </body>
