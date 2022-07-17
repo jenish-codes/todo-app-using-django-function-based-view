@@ -5,18 +5,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo</title>
+
+    <style>
+        
+        *{
+            padding: 0;
+            margin: 0;
+            outline: none;
+        }
+
+        body {
+            background: linear-gradient(
+                to right,
+                #333 0%,
+                #333 50%,
+                orange 50%,
+                orange 100%
+            );
+            height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .box {
+            margin: 10% auto;
+            max-width: 400px;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            padding: 20px;
+            min-height: 30vh;
+        }
+
+        .update {
+            padding: 20px;
+            overflow: hidden;
+            text-align: center;
+            border: 1px solid rgba(51, 51, 51, 0.295);
+            border-radius: 5px;
+            
+        }
+
+        .update input {
+            padding: 8px;
+            font-size: 12pt;
+            margin: 10px;
+        }
+
+        .update input[type="text"] {
+            width: 90%;
+        }
+
+        .update input[type="submit"] {
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+            border: 0;
+            border-radius: 5px;
+        }
+
+
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Edit Task</h1>
-        </div>
-        <div class="update">
-            <form action="{% url 'updatetask' task.id %}" method="post">
-                {% csrf_token %}
-                <input type="text" name="task" value="{{ task.task }}" required autofocus>
-                <input type="submit" value="Update">
-            </form>
+        <div class="box">
+            <div class="header">
+                <h1>Edit Task</h1>
+            </div>
+            <div class="update">
+                <form action="{% url 'updatetask' task.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="task" value="{{ task.task }}" required autofocus>
+                    <input type="submit" value="Update">
+                </form>
+            </div>
         </div>
     </div>
 </body>
