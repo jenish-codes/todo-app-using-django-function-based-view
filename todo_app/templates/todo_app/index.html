@@ -66,12 +66,43 @@
             color: #fff;
         }
 
+        
+
         .tasklist {
             display: flex;
-            justify-content: center;
+            position: relative;
             align-items: center;
-            font-size: 12pt;
+            flex-direction: column;
+            border: 1px solid rgba(51, 51, 51, 0.295);
+            border-radius: 5px;
+            /* margin-bottom: 8px; */
+            min-height: 250px;
         }
+
+        .content-left {
+            width: 100%;
+            float: left;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.295);
+            padding: 8px;
+        }
+
+        .content-right {
+            float: right;
+           
+        }
+
+        .edit {
+            color: #333;
+            font-size: 16pt;
+            text-decoration: none;
+        }
+
+        .delete {
+            color: red;
+            font-size: 15pt;
+            text-decoration: none;
+        }
+        
         
     </style>
 </head>
@@ -88,24 +119,21 @@
                     <input type="submit" class="button" value="Add Task">
                 </form>
             </div>
+
             <div class="tasklist">
-                <table>
-                    {% for t in tasks %}
-                    <div class="task-list">
-                        <tr class="task-row">
-                            <td>&#10022;{{ t.task }}</td>
-                            <td>
-                                <a href="{% url 'update' t.id %}">Edit</a>
-                                <a href="{% url 'delete' t.id %}">Delete</a>
-                            </td>
-                        </tr>
-                    </div>
-                        {% empty %}
-                    <h2>No task found! Create a task.</h2>
-                        {% endfor %}
-                </table>
-                
+                {% for t in tasks %}
+                <div class="content-left">
+                    &#10022; {{ t.task }}
                     
+                    <span class="content-right">
+                        <a class="edit" href="{% url 'update' t.id %}">&#9997; </a>
+                        <a class="delete" href="{% url 'delete' t.id %}"> &#10006;</a>
+                    </span>
+                </div>
+                
+                    {% empty %}
+                <h2>No task found! Create a task.</h2>
+                    {% endfor %}
             </div>
         </div>
     </div>
